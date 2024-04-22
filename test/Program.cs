@@ -57,7 +57,9 @@ class Program
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
                 string fileName = Path.GetFileName(filePath);
-                string uploadUrl = $"https://graph.microsoft.com/v1.0/me/drive/root:/Uploads/{fileName}:/content";
+                string driveId = "b!aVer49dogEiyLjJ5DrzqzBFjHF_v3ftOj2KC2KlmP_H91AVyo9azQbjQBNopudEQ";
+
+                string uploadUrl = $"https://graph.microsoft.com/v1.0/drives/{driveId}/root:/Uploads/{fileName}:/content";
 
                 using (var fileStream = File.OpenRead(filePath))
                 {
@@ -92,7 +94,9 @@ class Program
             {
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-                var response = await client.PostAsync($"https://graph.microsoft.com/v1.0/me/drive/items/{fileId}/createLink", null);
+                string driveId = "b!aVer49dogEiyLjJ5DrzqzBFjHF_v3ftOj2KC2KlmP_H91AVyo9azQbjQBNopudEQ";
+
+                var response = await client.PostAsync($"https://graph.microsoft.com/v1.0/drives/{driveId}/items/{fileId}/createLink", null);
 
                 if (response.IsSuccessStatusCode)
                 {
